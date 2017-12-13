@@ -1,5 +1,5 @@
 const Commando = require('discord.js-commando');
-const token = require('./logs.json')
+const logs = require('./logs.json')
 
 const client = new Commando.Client({
 	owner: logs.OWNER,

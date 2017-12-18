@@ -3,11 +3,11 @@ const commando = require('discord.js-commando');
 module.exports = class Age extends commando.Command {
   constructor(client) {
     super(client, {
-      name: 'age',
-      group: 'admin',
-      memberName: 'age',
-      description: 'Check Members Age',
-      details: 'Needs one int parameter for work correctly'
+		name: 'age',
+		group: 'admin',
+		memberName: 'age',
+		description: 'Check Members Age',
+		details: 'Needs one int parameter for work correctly'
     });
   }
 

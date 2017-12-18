@@ -3,7 +3,7 @@ const token = require('./token.json')
 
 const client = new Commando.Client({
 	owner: '298920630043148288',
-	commandPrefix: '?ik',
+	commandPrefix: '?',
 	unknownCommandResponse: false,
 	disableEveryone: true
 });
@@ -14,6 +14,7 @@ client.registry
 .registerDefaultTypes()
 .registerGroups([
 	['test', 'Test'],
+	['admin', 'Admin'],
 ])
 
 .registerCommandsIn(path.join(__dirname, 'commands'));

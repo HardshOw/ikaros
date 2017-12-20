@@ -11,21 +11,28 @@ module.exports = class Age extends commando.Command {
     });
   }
 
-  async run(msg, args){
-    if (checkAgeChar(args) == 1){
-      if (args >= 0 && args <= 17)
-        msg.channel.send("DEAD END");
-      else if (args >= 85)
-        msg.reply("Te fous pas de moi, jeune Padawan");
-      else{
-        msg.channel.send("HAPPY END");
-        msg.member.addRole(msg.guild.roles.find("name", "Membre"));
-      }
-    }
-    else
-        msg.reply("Rentrez un age valide merci");
-  }
-}
+	async run(msg, args){
+		if (msg.member.roles.find("name", "Membre") != undefined)
+		{
+			msg.reply("Te fous pas de la gueule des Nekos")
+			return ;
+		}
+		if (checkAgeChar(args) == 1){
+			if (args >= 0 && args <= 17){
+					msg.channel.send("Neko-Lulu pas contente, Neko pas accepter toi! Entrée au paradis refusée!");
+					msg.member.kick("Trop jeune");
+			}
+			else if (args >= 85)
+				msg.reply("Désolée nous n'acceptons que les personnes en condition physique pour pouvoir se Fap, Next.");
+			else{
+				msg.channel.send(" Neko-Lulu contente, Neko accepter toi dans son monde!");
+				msg.member.addRole(msg.guild.roles.find("name", "Membre"));
+			}
+			}
+			else
+				msg.reply("Rentrez un age valide merci");
+ 		}
+	}
 
 function checkAgeChar (age){
   let i = 0;

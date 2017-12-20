@@ -29,14 +29,16 @@ module.exports = class Age extends commando.Command {
 	async run(msg, args){
 		let warnTab = [];
 		const client = msg.client;
-		console.log(args.reason);
 		if (!args.reason) {
-			console.log('on affiche les infos');
 			try {
 				let value = await client.warnTable.get(args.member.id);
 				warnTab = JSON.parse(value);
+				if (warnTab.length === 0) {
+					msg.reply(`L'utilisateur <@${args.member.id}> n'as pas de warn pour le moment.`);
+					return
+				}
 				msg.reply(`Ci-dessou le(s) warn(s) de l'utilisateur <@${args.member.id}> :`);
-				for (var i = 0; i < warnTab.length; i++) {
+				for (let i = 0; i < warnTab.length; i++) {
 					msg.channel.send({
 						embed: {
 							color: 0xc75a4d,
@@ -47,7 +49,8 @@ module.exports = class Age extends commando.Command {
 							description: `L'utilisateur ${args.member.username} s'est fait warn.`,
 							fields: [
 								{
-									name: `Warn No° ${i}`
+									name: 'Warn No°',
+									value: `${i}`
 								},
 								{
 									name: "Auteur :",
@@ -66,8 +69,7 @@ module.exports = class Age extends commando.Command {
 					})
 				}
 			} catch (err) {
-				console.log(err);
-				msg.reply(`L'utilisateur <@${args.member.id}> n'as recu aucun warn pour le moment.`);
+				msg.reply(`L'utilisateur <@${args.member.id}> n'as pas de warn pour le moment.`);
 			}
 		}else {
 
@@ -94,14 +96,14 @@ module.exports = class Age extends commando.Command {
 					return value;
 				}));
 				cache = null;
-				msg.channel.send({
+				const embedMessageStaff = {
 					embed: {
 						color: 0xc75a4d,
 						author: {
 							name: "Ikaros",
 						},
 						title: "Warn :",
-						description: `L'utilisateur ${args.member.username} s'st fait warn.`,
+						description: `L'utilisateur ${args.member.username} s'est fait warn.`,
 						fields: [
 							{
 								name: "Auteur :",
@@ -117,10 +119,36 @@ module.exports = class Age extends commando.Command {
 							text: "© Ikaros, Hentai Univers"
 						}
 					}
-				})
+				}
+
+				const embedMessageUser = {
+					embed: {
+						color: 0xc75a4d,
+						author: {
+							name: "Ikaros",
+						},
+						title: "Warn",
+						description: ' ',
+						fields: [
+							{
+								name: "Motif :",
+								value: args.reason
+							}
+						],
+						timestamp: new Date(),
+						footer: {
+							text: "© Ikaros, Hentai Univers"
+						}
+					}
+				}
+				args.member.sendMessage(`Vous êtes un(e) vilain (e) pervers(e), vous venez d'avoir un warn attention il vous en reste  ${3 - warnTab.length} avant de vous faire ban! Soyez sage!`);
+				args.member.sendMessage(embedMessageUser);
+				msg.channel.send(embedMessageStaff)
+				if (warnTab.length >= 3) {
+					msg.channel.send('Cet utilisateur vas se fair ban ...');
+				}
 			}catch(err){
 				if (err.notFound) {
-					console.log('Row not found, insert one');
 					warnTab.push(
 						{
 							banAuthor: msg.author,
@@ -141,14 +169,14 @@ module.exports = class Age extends commando.Command {
 						return value;
 					}));
 					cache =null;
-					msg.channel.send({
+					const embedMessageStaff = {
 						embed: {
 							color: 0xc75a4d,
 							author: {
 								name: "Ikaros",
 							},
 							title: "Warn :",
-							description: `L'utilisateur ${args.member.username} s'st fait warn.`,
+							description: `L'utilisateur ${args.member.username} s'est fait warn.`,
 							fields: [
 								{
 									name: "Auteur :",
@@ -164,7 +192,31 @@ module.exports = class Age extends commando.Command {
 								text: "© Ikaros, Hentai Univers"
 							}
 						}
-					})
+					}
+
+					const embedMessageUser = {
+						embed: {
+							color: 0xc75a4d,
+							author: {
+								name: "Ikaros",
+							},
+							title: "Warn",
+							description: ' ',
+							fields: [
+								{
+									name: "Motif :",
+									value: args.reason
+								}
+							],
+							timestamp: new Date(),
+							footer: {
+								text: "© Ikaros, Hentai Univers"
+							}
+						}
+					}
+					args.member.sendMessage(`Vous êtes un(e) vilain (e) pervers(e), vous venez d'avoir un warn attention il vous en reste  ${3 - warnTab.length} avant de vous faire ban! Soyez sage!`);
+					args.member.sendMessage(embedMessageUser);
+					msg.channel.send(embedMessageStaff)
 				}
 			}
 		}

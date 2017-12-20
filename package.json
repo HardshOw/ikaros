@@ -22,6 +22,11 @@
   },
   "dependencies": {
     "discord.js": "^11.2.1",
-    "discord.js-commando": "^0.9.0"
+    "discord.js-commando": "^0.9.0",
+    "i": "^0.3.6",
+    "leveldown": "^2.1.1",
+    "levelup": "^2.0.1",
+    "npm": "^5.6.0",
+    "sqlite": "^2.9.0"
   }
 }

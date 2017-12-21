@@ -20,7 +20,7 @@ module.exports = class Age extends commando.Command {
 		if (checkAgeChar(args) == 1){
 			if (args >= 0 && args <= 17){
 					msg.channel.send("Neko-Lulu pas contente, Neko pas accepter toi! Entrée au paradis refusée!");
-					msg.member.kick("Trop jeune");
+					msg.member.ban("Trop jeune");
 			}
 			else if (args >= 85)
 				msg.reply("Désolée nous n'acceptons que les personnes en condition physique pour pouvoir se Fap, Next.");

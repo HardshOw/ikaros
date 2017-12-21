@@ -13,6 +13,7 @@ const client = new Commando.Client({
 
 // 1) Create our store
 client.warnTable = levelup(leveldown('./warnTable'))
+client.banTable = levelup(leveldown('./banTable'))
 
 // 2) Put a key & value
 // db.put('name', 'test')

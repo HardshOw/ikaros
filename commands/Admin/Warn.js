@@ -1,5 +1,5 @@
 const commando = require('discord.js-commando');
-const db = require('../../warn.json')
+const db = require('../../warn.json');
 
 module.exports = class Age extends commando.Command {
 	constructor(client) {
@@ -28,6 +28,10 @@ module.exports = class Age extends commando.Command {
  	}
 
 	async run(msg, args){
+		if (checkPerm(msg, "Mastermodo") == 0 && checkPerm(msg, "Supermodo") == 0 && checkPerm(msg, "Modo") == 0 && checkPerm(msg, "Modo étagères <3") == 0){
+			msg.reply("Vous n'avez pas la permission d'utiliser cette commande");
+			return ;
+		}
 		let warnTab = [];
 		const client = msg.client;
 		if (!args.reason) {
@@ -223,4 +227,11 @@ module.exports = class Age extends commando.Command {
 		}
 
 	}
+}
+
+function checkPerm(msg, args)
+{
+	if (msg.member.roles.find('name', args) != undefined)
+		return 1;
+	return 0;
 }

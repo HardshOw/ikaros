@@ -20,13 +20,14 @@ module.exports = class Age extends commando.Command {
 		if (checkAgeChar(args) == 1){
 			if (args >= 0 && args <= 17){
 					msg.channel.send("Neko-Lulu pas contente, Neko pas accepter toi! Entrée au paradis refusée!");
-					msg.member.kick("Trop jeune");
+					msg.member.ban("Trop jeune");
 			}
 			else if (args >= 85)
 				msg.reply("Désolée nous n'acceptons que les personnes en condition physique pour pouvoir se Fap, Next.");
 			else{
 				msg.channel.send(" Neko-Lulu contente, Neko accepter toi dans son monde!");
 				msg.member.addRole(msg.guild.roles.find("name", "Membre"));
+				sendRules(msg);
 			}
 			}
 			else
@@ -43,4 +44,11 @@ function checkAgeChar (age){
     i++;
   }
   return 1;
+}
+
+function sendRules (msg){
+	msg.member.send("Bonjour et bienvenue a toi, jeune pervers(e) <3 Tu viens d'arriver sur le serveur Hentai Univers et je\
+ suis la pour t'aider. Je t'invite a aller lire la charte située dans le channel #charte du serveur pour être au\
+ courant des règles a respecter ici ^^ pense aussi a vérifier les messages épinglés, ils contiennent des infos\
+ utiles ! Sur ce, je te laisse découvrir le monde du Hentai et sa communauté sur le serveur <3");
 }

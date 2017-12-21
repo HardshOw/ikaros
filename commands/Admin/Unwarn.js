@@ -9,6 +9,7 @@ module.exports = class Age extends commando.Command {
 			memberName: 'unwarn',
 			description: 'Unwarn users',
 			details: "Remove a warn from user's warn list",
+			userPermissions: ['BAN_MEMBERS'],
 			args:
 			[
 				{
@@ -25,6 +26,13 @@ module.exports = class Age extends commando.Command {
 			]
 		});
  	}
+
+	// hasPermission(msg) {
+	// 	const allowTo = msg.member.roles.every(function () {
+	// 		role.hasPermissions(['BAN_MEMBERS']);
+	// 	}, role)
+	// 	// return msg.client.isOwner(msg.author);
+	// }
 
 	async run(msg, args){
 		let warnTab = [];

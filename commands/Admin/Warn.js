@@ -9,6 +9,7 @@ module.exports = class Age extends commando.Command {
 			memberName: 'warn',
 			description: 'Warn users',
 			details: 'Each users got 3 chances before get ban.',
+			userPermissions: ['BAN_MEMBERS'],
 			args:
 			[
 				{

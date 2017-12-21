@@ -11,17 +11,7 @@ const client = new Commando.Client({
 	disableEveryone: true
 });
 
-// 1) Create our store
 client.warnTable = levelup(leveldown('./warnTable'))
-
-// 2) Put a key & value
-// db.put('name', 'test')
-// db.get('name', function (err, value) {
-// 	if (err) return console.log('Ooops!', err)
-//
-// 	console.log('name=' + value)
-// })
-
 
 client.registry
 .registerDefaultTypes()

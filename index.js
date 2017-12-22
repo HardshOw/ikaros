@@ -1,5 +1,4 @@
 const Commando = require('discord.js-commando');
-const logs = require('./logs.json')
 const path = require('path');
 const levelup = require('levelup')
 const leveldown = require('leveldown')

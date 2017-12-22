@@ -1,5 +1,4 @@
 const commando = require('discord.js-commando');
-const db = require('../../ban.json')
 
 module.exports = class Ban extends commando.Command {
 	constructor(client) {

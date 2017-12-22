@@ -12,7 +12,7 @@ module.exports = class Age extends commando.Command {
   }
 
 	async run(msg, args){
-		if (msg.member.roles.find("name", "Membre") != undefined)
+		if (msg.member.roles.find("name", "Membres") != undefined)
 		{
 			msg.reply("Te fous pas de la gueule des Nekos")
 			return ;
@@ -26,7 +26,7 @@ module.exports = class Age extends commando.Command {
 				msg.reply("Désolée nous n'acceptons que les personnes en condition physique pour pouvoir se Fap, Next.");
 			else{
 				msg.channel.send(" Neko-Lulu contente, Neko accepter toi dans son monde!");
-				msg.member.addRole(msg.guild.roles.find("name", "Membre"));
+				msg.member.addRole(msg.guild.roles.find("name", "Membres"));
 				sendRules(msg);
 			}
 			}

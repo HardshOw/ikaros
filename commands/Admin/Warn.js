@@ -1,7 +1,7 @@
 const commando = require('discord.js-commando');
 const db = require('../../warn.json');
 
-module.exports = class Age extends commando.Command {
+module.exports = class Warn extends commando.Command {
 	constructor(client) {
 		super(client, {
 			name: 'warn',
@@ -9,7 +9,6 @@ module.exports = class Age extends commando.Command {
 			memberName: 'warn',
 			description: 'Warn users',
 			details: 'Each users got 3 chances before get ban.',
-			userPermissions: ['BAN_MEMBERS'],
 			args:
 			[
 				{
@@ -150,7 +149,55 @@ module.exports = class Age extends commando.Command {
 				args.member.sendMessage(embedMessageUser);
 				msg.channel.send(embedMessageStaff)
 				if (warnTab.length >= 3) {
-					msg.channel.send('Cet utilisateur vas se fair ban ...');
+
+					const embedBanMessageUser = {
+						embed: {
+							color: 0xc75a4d,
+							author: {
+								name: "Ikaros",
+							},
+							title: "Ban",
+							description: ' ',
+							fields: [
+								{
+									name: "Motif :",
+									value: 'Cet user à recu 3 avertissement.'
+								}
+							],
+							timestamp: new Date(),
+							footer: {
+								text: "© Ikaros, Hentai Univers"
+							}
+						}
+					}
+
+					const embedBanMessageStaff = {
+						embed: {
+							color: 0xc75a4d,
+							author: {
+								name: "Ikaros",
+							},
+							title: "Ban :",
+							description: `L'utilisateur ${args.member.username} s'est fait Ban.`,
+							fields: [
+								{
+									name: "Auteur :",
+									value: msg.author.username
+								},
+								{
+									name: "Motif :",
+									value: 'Cet user à recu 3 avertissement.'
+								}
+							],
+							timestamp: new Date(),
+							footer: {
+								text: "© Ikaros, Hentai Univers"
+							}
+						}
+					}
+					args.member.sendMessage(embedBanMessageUser);
+					msg.guild.ban(args.member.id, {reason: 'Cet user à recu 3 avertissement.'});
+					msg.channel.send(embedBanMessageStaff)
 				}
 			}catch(err){
 				if (err.notFound) {

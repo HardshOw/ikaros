@@ -12,7 +12,6 @@ const client = new Commando.Client({
 });
 
 client.warnTable = levelup(leveldown('./warnTable'))
-client.banTable = levelup(leveldown('./banTable'))
 
 client.registry
 .registerDefaultTypes()

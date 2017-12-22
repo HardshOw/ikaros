@@ -4,7 +4,7 @@ module.exports = class Warn extends commando.Command {
 	constructor(client) {
 		super(client, {
 			name: 'warn',
-			group: 'admin',
+			group: 'Admin',
 			memberName: 'warn',
 			description: 'Warn users',
 			details: 'Each users got 3 chances before get ban.',

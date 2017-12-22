@@ -26,7 +26,13 @@ client.on('guildMemberAdd', member => {
 	const channel = member.guild.channels.find('name', 'hall_d_entree');
 	if (!channel)
 		return ;
-	channel.send(`Bonjour <@${member.id}> sur le serveur Hentai Univers, je t\'invite a nous indiquer ton age avec la commande \?age \"ton_age\" avant de recevoir plus d\'informations ˆˆ`);
+	const command = '```?age x```'
+	channel.send(
+		`Bonjour <@${member.id}> sur le serveur Hentai Univers !
+		Je t'invite a nous indiquer ton age avec la commande suivante avant de recevoir plus d'informations.
+		Exemple :
+		${command}
+		`);
 });
 
 client.login(process.env.BOT_TOKEN);

@@ -4,7 +4,7 @@ module.exports = class Ban extends commando.Command {
 	constructor(client) {
 		super(client, {
 			name: 'ban',
-			group: 'admin',
+			group: 'Admin',
 			memberName: 'ban',
 			description: 'Ban users',
 			details: 'Ban user for heavy fault',

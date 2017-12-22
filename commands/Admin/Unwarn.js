@@ -4,7 +4,7 @@ module.exports = class Warn extends commando.Command {
 	constructor(client) {
 		super(client, {
 			name: 'unwarn',
-			group: 'admin',
+			group: 'Admin',
 			memberName: 'unwarn',
 			description: 'Unwarn users',
 			details: "Remove a warn from user's warn list",

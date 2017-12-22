@@ -4,7 +4,7 @@ module.exports = class Age extends commando.Command {
   constructor(client) {
     super(client, {
 		name: 'age',
-		group: 'admin',
+		group: 'Admin',
 		memberName: 'age',
 		description: 'Check Members Age',
 		details: 'Needs one int parameter for work correctly'
@@ -47,8 +47,10 @@ function checkAgeChar (age){
 }
 
 function sendRules (msg){
-	msg.member.send("Bonjour et bienvenue a toi, jeune pervers(e) <3 Tu viens d'arriver sur le serveur Hentai Univers et je\
- suis la pour t'aider. Je t'invite a aller lire la charte située dans le channel #charte du serveur pour être au\
- courant des règles a respecter ici ^^ pense aussi a vérifier les messages épinglés, ils contiennent des infos\
- utiles ! Sur ce, je te laisse découvrir le monde du Hentai et sa communauté sur le serveur <3");
+	msg.member.send(`Bonjour et bienvenue a toi, jeune pervers(e) :heart:.
+Tu viens d'arriver sur le serveur Hentai Univers et je suis la pour t'aider.
+Je t'invite à aller lire la charte située dans le channel #charte du serveur pour être au
+courant des règles a respecter ici ^^ pense aussi a vérifier les messages épinglés,
+ils contiennent des infos utiles !
+Sur ce, je te laisse découvrir le monde du Hentai et sa communauté sur le serveur :heart:`);
 }

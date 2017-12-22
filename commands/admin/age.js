@@ -4,7 +4,7 @@ module.exports = class Age extends commando.Command {
   constructor(client) {
     super(client, {
 		name: 'age',
-		group: 'Admin',
+		group: 'admin',
 		memberName: 'age',
 		description: 'Check Members Age',
 		details: 'Needs one int parameter for work correctly'

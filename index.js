@@ -20,6 +20,7 @@ client.registry
 	['admin', 'Admin'],
 	['help', 'Help'],
 	['member', 'Membre'],
+	['role', 'Role'],
 ])
 
 .registerCommandsIn(path.join(__dirname, 'commands'));

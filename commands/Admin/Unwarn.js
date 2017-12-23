@@ -1,7 +1,7 @@
 const commando = require('discord.js-commando');
 const db = require('../../warn.json')
 
-module.exports = class Age extends commando.Command {
+module.exports = class Warn extends commando.Command {
 	constructor(client) {
 		super(client, {
 			name: 'unwarn',
@@ -9,6 +9,7 @@ module.exports = class Age extends commando.Command {
 			memberName: 'unwarn',
 			description: 'Unwarn users',
 			details: "Remove a warn from user's warn list",
+			userPermissions: ['BAN_MEMBERS'],
 			args:
 			[
 				{
@@ -25,6 +26,13 @@ module.exports = class Age extends commando.Command {
 			]
 		});
  	}
+
+	// hasPermission(msg) {
+	// 	const allowTo = msg.member.roles.every(function () {
+	// 		role.hasPermissions(['BAN_MEMBERS']);
+	// 	}, role)
+	// 	// return msg.client.isOwner(msg.author);
+	// }
 
 	async run(msg, args){
 		if (checkPerm(msg, "Mastermodo") == 0 && checkPerm(msg, "Supermodo") == 0 && checkPerm(msg, "Modo") == 0 && checkPerm(msg, "Modo étagères <3") == 0){

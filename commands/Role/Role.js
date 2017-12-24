@@ -199,18 +199,24 @@ function remRole(msg, args){
 
 function getRoleList(msg, args){
 
-	msg.channel.send("Voici la liste de tout les roles auto-assignables :");
+	let roleTable = []
 	msg.channel.guild.roles.forEach(function(value){
-		if (value.name.startsWith('Fan')) {
 
-			msg.channel.send({
-				embed: {
-					color: 0x50f0b0,
-					title: value.name,
-				}
+		if (value.name.startsWith('Fan')) {
+			roleTable.push({
+				name: "_ _ _ _ _ _",
+				value: value.name,
 			});
+
 		}
 	})
+	msg.channel.send({
+		embed: {
+			color: 0x50f0b0,
+			title: "Liste des roles auto-assignables :",
+			fields: roleTable,
+		}
+	});
 }
 
 function checkPerm(msg, args)

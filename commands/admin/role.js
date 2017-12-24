@@ -98,6 +98,10 @@ function getRole(msg, args){
 		msg.channel.send("```Ce role n'existe pas ou n'est pas assignable```");
 		return ;
 	}
+	if (msg.member.roles.find('name', args.role) != undefined){
+		msg.channel.send("```Vous avez déja ce role```");
+		return ;
+	}
 	let id = msg.guild.roles.find('name', args.role);
 	msg.member.addRole(id);
 	msg.channel.send("```Role attribué```");

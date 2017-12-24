@@ -2,7 +2,6 @@ const Commando = require('discord.js-commando');
 const path = require('path');
 const levelup = require('levelup')
 const leveldown = require('leveldown')
-const logs = require('./logs.json')
 
 const client = new Commando.Client({
 	owner: process.env.BOT_OWNER,
@@ -27,6 +26,7 @@ client.on('guildMemberAdd', member => {
 	const channel = member.guild.channels.find('name', 'hall_d_entree');
 	if (!channel)
 		return ;
+
 		const command = '```?age 16```'
 		channel.send(
 			`Bonjour <@${member.id}> et bienvenue sur le serveur Hentai Univers !

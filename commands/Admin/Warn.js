@@ -54,7 +54,7 @@ module.exports = class Warn extends commando.Command {
 							fields: [
 								{
 									name: 'Warn No°',
-									value: `${i}`
+									value: `${i+1}`
 								},
 								{
 									name: "Auteur :",

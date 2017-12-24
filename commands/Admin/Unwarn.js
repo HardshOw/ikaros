@@ -6,9 +6,9 @@ module.exports = class Warn extends commando.Command {
 			name: 'unwarn',
 			group: 'admin',
 			memberName: 'unwarn',
-			description: 'Unwarn users',
-			details: "Remove a warn from user's warn list",
-			userPermissions: ['BAN_MEMBERS'],
+			description: "Retire un warn de la liste des warns de l'utilisateur ciblé.",
+			details: "```?unwarn @utilisateur``` Permet de consulter la liste des warns de l'utilisateur ciblé. ```?unwarn @utilisateur 1``` ou ```?unwarn <@utilisateur_id> 1``` Permet de retirer le warn Numéro : 1 de la liste des warns de l'utilisateur ciblé.",
+			examples: ["?unwarn @utilisateur", "?unwarn @utilisateur 1"],
 			args:
 			[
 				{
@@ -52,7 +52,7 @@ module.exports = class Warn extends commando.Command {
 				for (let i = 0; i < warnTab.length; i++) {
 					msg.channel.send({
 						embed: {
-							color: 0xc75a4d,
+							color: 0xffc500,
 							author: {
 								name: "Ikaros",
 							},
@@ -90,7 +90,7 @@ module.exports = class Warn extends commando.Command {
 				const index = args.num - 1;
 				const embedMessageStaff = {
 					embed: {
-						color: 0xc75a4d,
+						color: 0xffc500,
 						author: {
 							name: "Ikaros",
 						},
@@ -115,7 +115,7 @@ module.exports = class Warn extends commando.Command {
 
 				const embedMessageUser = {
 					embed: {
-						color: 0xc75a4d,
+						color: 0xffc500,
 						author: {
 							name: "Ikaros",
 						},

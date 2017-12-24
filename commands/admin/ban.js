@@ -1,5 +1,4 @@
 const commando = require('discord.js-commando');
-const db = require('../../ban.json')
 
 module.exports = class Ban extends commando.Command {
 	constructor(client) {
@@ -7,8 +6,9 @@ module.exports = class Ban extends commando.Command {
 			name: 'ban',
 			group: 'admin',
 			memberName: 'ban',
-			description: 'Ban users',
-			details: 'Ban user for heavy fault',
+			description: "Ban un membre de manière permanante. Une raison doit obligatoirement etre spécifié.",
+			details: "```?ban @utilisateur raison``` ou ```?ban <@id_utilisateur> raison``` Permet de bannir l'utilisateur ciblé, à condition qu'il soit sur le server.",
+			examples: ["?ban @utilisateur raison", "?ban <@id_utilisateur> raison"],
 			args:
 			[
 				{

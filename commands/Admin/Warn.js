@@ -6,8 +6,9 @@ module.exports = class Warn extends commando.Command {
 			name: 'warn',
 			group: 'admin',
 			memberName: 'warn',
-			description: 'Warn users',
-			details: 'Each users got 3 chances before get ban.',
+			description: "Délivre un avertissement (warn) à l'utilisateur ciblé. \n Au bout de 3 avertissements, l'utilisateur est automatiquement banni.",
+			details: "```?warn @utilisateur``` Permet de consulter la liste des warns de l'utilisateur ciblé. ```?warn @utilisateur raison``` ou ```?warn <@utilisateur_id> raison``` Permet de warn un utilisateur.",
+			examples: ["?warn @utilisateur raison", "?warn <@utilisateur_id> raison"],
 			args:
 			[
 				{
@@ -44,7 +45,7 @@ module.exports = class Warn extends commando.Command {
 				for (let i = 0; i < warnTab.length; i++) {
 					msg.channel.send({
 						embed: {
-							color: 0xc75a4d,
+							color: 0xffc500,
 							author: {
 								name: "Ikaros",
 							},
@@ -101,7 +102,7 @@ module.exports = class Warn extends commando.Command {
 				cache = null;
 				const embedMessageStaff = {
 					embed: {
-						color: 0xc75a4d,
+						color: 0xffc500,
 						author: {
 							name: "Ikaros",
 						},
@@ -126,7 +127,7 @@ module.exports = class Warn extends commando.Command {
 
 				const embedMessageUser = {
 					embed: {
-						color: 0xc75a4d,
+						color: 0xffc500,
 						author: {
 							name: "Ikaros",
 						},
@@ -151,7 +152,7 @@ module.exports = class Warn extends commando.Command {
 
 					const embedBanMessageUser = {
 						embed: {
-							color: 0xc75a4d,
+							color: 0xffc500,
 							author: {
 								name: "Ikaros",
 							},
@@ -172,7 +173,7 @@ module.exports = class Warn extends commando.Command {
 
 					const embedBanMessageStaff = {
 						embed: {
-							color: 0xc75a4d,
+							color: 0xffc500,
 							author: {
 								name: "Ikaros",
 							},
@@ -222,7 +223,7 @@ module.exports = class Warn extends commando.Command {
 					cache =null;
 					const embedMessageStaff = {
 						embed: {
-							color: 0xc75a4d,
+							color: 0xffc500,
 							author: {
 								name: "Ikaros",
 							},
@@ -247,7 +248,7 @@ module.exports = class Warn extends commando.Command {
 
 					const embedMessageUser = {
 						embed: {
-							color: 0xc75a4d,
+							color: 0xffc500,
 							author: {
 								name: "Ikaros",
 							},

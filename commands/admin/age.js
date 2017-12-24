@@ -1,15 +1,17 @@
 const commando = require('discord.js-commando');
 
 module.exports = class Age extends commando.Command {
-  constructor(client) {
-    super(client, {
-		name: 'age',
-		group: 'admin',
-		memberName: 'age',
-		description: 'Check Members Age',
-		details: 'Needs one int parameter for work correctly'
-    });
-  }
+	constructor(client) {
+		super(client, {
+			name: 'age',
+			group: 'admin',
+			memberName: 'age',
+			description: "Vérifier l'age d'un nouveau membre.",
+			details: `utilisable une seule fois dans le Hall d'entrée.
+Attribut le role "Membres" si l'utilisateur est vérifié. `,
+			examples: ["```?age 16```"]
+		});
+	}
 
 	async run(msg, args){
 		if (msg.member.roles.find("name", "Membres") != undefined)
@@ -47,8 +49,10 @@ function checkAgeChar (age){
 }
 
 function sendRules (msg){
-	msg.member.send("Bonjour et bienvenue a toi, jeune pervers(e) <3 Tu viens d'arriver sur le serveur Hentai Univers et je\
- suis la pour t'aider. Je t'invite a aller lire la charte située dans le channel #charte du serveur pour être au\
- courant des règles a respecter ici ^^ pense aussi a vérifier les messages épinglés, ils contiennent des infos\
- utiles ! Sur ce, je te laisse découvrir le monde du Hentai et sa communauté sur le serveur <3");
+	msg.member.send(`Bonjour et bienvenue a toi, jeune pervers(e) :heart:.
+Tu viens d'arriver sur le serveur Hentai Univers et je suis la pour t'aider.
+Je t'invite à aller lire la charte située dans le channel #charte du serveur pour être au
+courant des règles a respecter ici ^^ pense aussi a vérifier les messages épinglés,
+ils contiennent des infos utiles !
+Sur ce, je te laisse découvrir le monde du Hentai et sa communauté sur le serveur :heart:`);
 }

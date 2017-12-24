@@ -16,10 +16,8 @@ client.warnTable = levelup(leveldown('./warnTable'))
 client.registry
 .registerDefaultTypes()
 .registerGroups([
-	['test', 'Test'],
 	['admin', 'Admin'],
 	['help', 'Help'],
-	['member', 'Membre'],
 	['role', 'Role'],
 ])
 
@@ -31,7 +29,7 @@ client.on('guildMemberAdd', member => {
 		return ;
 		const command = '```?age 16```'
 		channel.send(
-			`Bonjour <@${member.id}> sur le serveur Hentai Univers !
+			`Bonjour <@${member.id}> et bienvenue sur le serveur Hentai Univers !
 Je t'invite a nous indiquer ton age avec la commande suivante avant de recevoir plus d'informations.
 Exemple :
 ${command}

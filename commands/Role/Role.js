@@ -6,7 +6,9 @@ module.exports = class Role extends commando.Command {
 			name: 'role',
 			group: 'role',
 			memberName: 'role',
-			description: 'Role command',
+			description: "Commande d'auto-assignation de role.",
+			details: "```?role``` Permet d'afficher la liste des roles auto-assignables. ```?role get Fan BBW``` Permet de s'assigner le role 'Fan BBW'. ```?role remove Fan BBW``` Permet de se retiré le role 'Fan BBW'.",
+			examples: ["?role", "?role get Fan BBW", "?role remove BBW"],
 			args: [
 				{
 					key: 'property',
@@ -67,14 +69,50 @@ module.exports = class Role extends commando.Command {
 }
 
 function errorMessage(msg, args){
-	let string = "```";
 
-	string += "Voici les commandes que vous pouvez utiliser, My Master :\n- ?role get \"Nom du role\"\n- ?role remove \"Nom du role\"\n";
 	if (checkPerm(msg, "Mastermodo") == 1 || checkPerm(msg, "Supermodo") == 1 || checkPerm(msg, "Modo") == 1){
-		string += "- ?role add \"Nom du role\" (créé le role)\n- ?role delete \"Nom du role\" (supprime le role)";
+		msg.channel.send({
+			embed: {
+				color: 0x50f0b0,
+				title: "Commandes du module Role :",
+				fields: [
+					{
+						name: "Permet de creer un role auto-assignable.",
+						value: "```?role add nom_du_role```"
+					},
+					{
+						name: "Permet de se supprimé un role auto-assignable.",
+						value: "```?role delete nom_du_role```"
+					},
+					{
+						name: "Permet de s'auto-assigner un role.",
+						value: "```?role get nom_du_role```"
+					},
+					{
+						name: "Permet de se désassigner un role.",
+						value: "```?role remove nom_du_role```"
+					}
+				],
+			}
+		});
+		return;
 	}
-	string += "```";
-	msg.channel.send(string);
+	msg.channel.send({
+		embed: {
+			color: 0x50f0b0,
+			title: "Commandes du module Role :",
+			fields: [
+				{
+					name: "Permet de s'auto-assigner un role.",
+					value: "```?role get nom_du_role```"
+				},
+				{
+					name: "Permet de se désassigner un role.",
+					value: "```?role remove nom_du_role```"
+				},
+			],
+		}
+	});
 }
 
 function addRole(msg, args){
@@ -86,7 +124,15 @@ function addRole(msg, args){
 		name : args.role,
 		color: [149, 240, 178],
 	});
-	msg.channel.send("```Role créé ```");
+	msg.channel.send({
+		embed: {
+			color: 0x50f0b0,
+			author: {
+				name: "Role crée",
+			},
+			title: args.role,
+		}
+	});
 }
 
 function getRole(msg, args){
@@ -100,7 +146,15 @@ function getRole(msg, args){
 	}
 	let id = msg.guild.roles.find('name', args.role);
 	msg.member.addRole(id);
-	msg.channel.send("```Role attribué```");
+	msg.channel.send({
+		embed: {
+			color: 0x50f0b0,
+			author: {
+				name: "Role attribué",
+			},
+			title: args.role,
+		}
+	});
 }
 
 function delRole(msg, args){
@@ -110,7 +164,15 @@ function delRole(msg, args){
 	}
 	let role = msg.guild.roles.find('name', args.role);
 	role.delete();
-	msg.channel.send("```Role supprimé```");
+	msg.channel.send({
+		embed: {
+			color: 0x50f0b0,
+			author: {
+				name: "Role supprimé",
+			},
+			title: args.role,
+		}
+	});
 }
 
 function remRole(msg, args){
@@ -124,23 +186,31 @@ function remRole(msg, args){
 	}
 	let id = msg.guild.roles.find('name', args.role);
 	msg.member.removeRole(id);
-	msg.channel.send("```Role retiré```");
+	msg.channel.send({
+		embed: {
+			color: 0x50f0b0,
+			author: {
+				name: "Role retiré",
+			},
+			title: args.role,
+		}
+	});
 }
 
 function getRoleList(msg, args){
-	let listRole = [];
-	let stringRole = "```Voici la liste des roles auto-assignables\n";
 
-	msg.channel.guild.roles.map(function(value){
-		if (value.name.startsWith('Fan')){
-			listRole.push(value.name);
+	msg.channel.send("Voici la liste de tout les roles auto-assignables :");
+	msg.channel.guild.roles.forEach(function(value){
+		if (value.name.startsWith('Fan')) {
+
+			msg.channel.send({
+				embed: {
+					color: 0x50f0b0,
+					title: value.name,
+				}
+			});
 		}
-	});
-	for (let i = 0; i < listRole.length; i++){
-		stringRole += listRole[i] + '\n';
-	}
-	stringRole += "```";
-	msg.channel.send(stringRole);
+	})
 }
 
 function checkPerm(msg, args)

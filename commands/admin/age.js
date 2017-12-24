@@ -1,15 +1,17 @@
 const commando = require('discord.js-commando');
 
 module.exports = class Age extends commando.Command {
-  constructor(client) {
-    super(client, {
-		name: 'age',
-		group: 'admin',
-		memberName: 'age',
-		description: 'Check Members Age',
-		details: 'Needs one int parameter for work correctly'
-    });
-  }
+	constructor(client) {
+		super(client, {
+			name: 'age',
+			group: 'admin',
+			memberName: 'age',
+			description: "Vérifier l'age d'un nouveau membre.",
+			details: `utilisable une seule fois dans le Hall d'entrée.
+Attribut le role "Membres" si l'utilisateur est vérifié. `,
+			examples: ["```?age 16```"]
+		});
+	}
 
 	async run(msg, args){
 		if (msg.member.roles.find("name", "Membres") != undefined)

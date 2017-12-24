@@ -4,7 +4,7 @@ const levelup = require('levelup')
 const leveldown = require('leveldown')
 
 const client = new Commando.Client({
-	owner: "99825469645402112",
+	owner: process.env.BOT_OWNER,
 	commandPrefix: '?',
 	unknownCommandResponse: false,
 	disableEveryone: true

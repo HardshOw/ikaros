@@ -136,12 +136,12 @@ function addRole(msg, args){
 }
 
 function getRole(msg, args){
-	if (!args.role.startsWith("Fan")){
-		msg.channel.send(`Vous n'avez pas a vous assigner ce role, ${msg.member.user.username}`);
-		return ;
-	}
 	if (msg.guild.roles.find('name', args.role) == undefined){
 		msg.channel.send("```Ce role n'existe pas ou n'est pas assignable```");
+		return ;
+	}
+	if (!args.role.startsWith("Fan")){
+		msg.channel.send(`Vous n'avez pas a vous assigner ce role, ${msg.member.user.username}`);
 		return ;
 	}
 	if (msg.member.roles.find('name', args.role) != undefined){

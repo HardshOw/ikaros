@@ -1,8 +1,10 @@
 const Commando = require('discord.js-commando');
 const path = require('path');
-const levelup = require('levelup')
-const leveldown = require('leveldown')
-const logs = require('./logs.json')
+const levelup = require('levelup');
+const leveldown = require('leveldown');
+const logs = require('./logs.json');
+
+const EventHandler = require("./commands/admin/EventHandler.js");
 
 const client = new Commando.Client({
 	owner: logs.OWNER,

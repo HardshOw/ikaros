@@ -203,24 +203,34 @@ function remRole(msg, args){
 
 function getRoleList(msg, args){
 
-	let roleTable = []
+	let roleString = "```";
+	let roleTable = [];
 	msg.channel.guild.roles.forEach(function(value){
 
 		if (value.name.startsWith('Fan')) {
 			roleTable.push({
-				name: "_ _ _ _ _ _",
-				value: value.name,
-			});
-
+				value: `${value.name}`
+			})
 		}
 	})
+	roleTable.sort((function(a, b){
+    if(a.value < b.value) return -1;
+    if(a.value > b.value) return 1;
+    return 0;
+}));
+	roleTable.forEach(function(value){
+		roleString += `${value.value}\n`;
+	})
+	roleString += "```";
 	msg.channel.send({
 		embed: {
-			color: 0x50f0b0,
-			title: "Liste des roles auto-assignables :",
-			fields: roleTable,
-		}
-	});
+			color : 0x50f0b0,
+		fields : [{
+			name: "Liste des roles auto-assignables",
+			value: roleString
+		}]
+	}
+	})
 }
 
 function checkPerm(msg, args)

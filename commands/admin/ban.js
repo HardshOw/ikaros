@@ -81,7 +81,6 @@ module.exports = class Ban extends commando.Command {
 
 			await args.member.send(embedMessageUser);
 			msg.guild.ban(args.member.id, {reason: args.reason});
-			console.log('banned');
 			msg.channel.send(embedMessageStaff)
 
 		}catch (err){

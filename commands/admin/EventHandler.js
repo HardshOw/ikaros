@@ -7,35 +7,217 @@ module.exports = class EventHandler {
 		this.getNewUser(client);
 		this.userLeave(client);
 		this.getNewRole(client);
+		this.userBan(client);
+		this.userUnban(client);
+		this.getMemberUpdate(client);
 	}
-	getDeleteRole(client) {
-		client.on('roleDelete', role => {
-		const logs_channel = role.guild.channels.find('name', 'logs');
-		logs_channel.send(`Le role ${role.name} a été supprimé.`);
-	});
-};
 	getDeleteMessage(client) {
 		client.on('messageDelete', message => {
 		const logs_channel = message.guild.channels.find('name', 'logs');
-		logs_channel.send(`Le message \`\`\`${message.content}\`\`\`\n écrit par ${message.author} a été supprimé`);
+		if (message.content.length === 0){
+			message.content = "[NO TEXT IN MESSAGE]";
+		}
+		logs_channel.send({
+			embed :{
+				color : 0x50f0b0,
+				fields :[{
+					name: "Log - Message Supprimé",
+					value: `Message supprimé dans ${message.channel}`,
+				},
+				{
+					name: "Message",
+					value: `${message.content}`,
+				},
+				{
+					name: "Auteur",
+					value: `${message.author}`,
+				},
+				{
+					name: "Date",
+					value: `${message.createdAt}`,
+				}],
+				timestamp: new Date(),
+				footer: {
+					text: "© Ikaros, Hentai Univers"
+				}
+			}
+		})
 	});
 };
 	getNewUser(client){
 	client.on('guildMemberAdd', membre => {
 		const logs_channel = membre.guild.channels.find('name', 'logs');
-		logs_channel.send(`Le membre <@${membre.id}> a rejoint le serveur`);
+		logs_channel.send({
+			embed :{
+				color : 0x50f0b0,
+				fields :[{
+					name: "Log - Nouveau Membre",
+					value: `Le membre <@${membre.id}> a rejoint le serveur`,
+				}],
+				timestamp: new Date(),
+				footer: {
+					text: "© Ikaros, Hentai Univers"
+				}
+			}
+		})
 	});
 };
 	userLeave(client){
 	client.on('guildMemberRemove', membre =>{
 		const logs_channel = membre.guild.channels.find('name', 'logs');
-		logs_channel.send(`Le membre <@${membre.id}> a quitté le serveur`)
+		logs_channel.send({
+			embed :{
+				color : 0x50f0b0,
+				fields :[{
+					name: "Log - Membre Parti",
+					value: `Le membre <@${membre.id}> a quitté le serveur`,
+				}],
+				timestamp: new Date(),
+				footer: {
+					text: "© Ikaros, Hentai Univers"
+				}
+			}
+		})
 	});
 };
 	getNewRole(client){
 	client.on('roleCreate', role => {
 		const logs_channel = role.guild.channels.find('name', 'logs');
-		logs_channel.send(`Le role ${role.name} a été créé.`);
+		logs_channel.send({
+			embed :{
+				color : 0x50f0b0,
+				fields :[{
+					name: "Log - Création Role",
+					value: `Le role ${role.name} a été créé.`,
+				}],
+				timestamp: new Date(),
+				footer: {
+					text: "© Ikaros, Hentai Univers"
+				}
+			}
+		})
 	});
 };
+	getDeleteRole(client) {
+		client.on('roleDelete', role => {
+			const logs_channel = role.guild.channels.find('name', 'logs');
+			logs_channel.send({
+				embed :{
+					color : 0x50f0b0,
+					fields :[{
+						name: "Log - Suppression Role",
+						value: `Le role ${role.name} a été supprimé.`,
+					}],
+					timestamp: new Date(),
+					footer: {
+						text: "© Ikaros, Hentai Univers"
+					}
+				}
+			})
+	});
+};
+	getMemberUpdate(client){
+	client.on('guildMemberUpdate', function(oldMember, newMember){
+		const logs_channel = oldMember.guild.channels.find('name', 'logs');
+		let oldRole = oldMember.roles.array();
+		let newRole = newMember.roles.array();
+		oldRole.sort((function(a, b){
+	    if(a.value < b.value) return -1;
+	    if(a.value > b.value) return 1;
+	    return 0;
+		}));
+		newRole.sort((function(a, b){
+	    if(a.value < b.value) return -1;
+	    if(a.value > b.value) return 1;
+	    return 0;
+		}));
+		if (oldRole.length == newRole.length){
+			console.log(oldRole.length);
+			return ;
+		}
+		else if (oldRole.length < newRole.length){
+			memberGetRole(oldRole, newRole, newMember, logs_channel);
+			return ;
+		}
+		memberRemoveRole(oldRole, newRole, newMember, logs_channel);
+	});
+};
+	userBan(client){
+	client.on('guildBanAdd', function(guild, user){
+		const logs_channel = guild.channels.find('name', 'logs');
+		logs_channel.send({
+			embed :{
+				color : 0x50f0b0,
+				fields :[{
+					name: "Log - Membre Banni",
+					value: `Le membre <@${user.id}> a été banni du serveur`,
+				}],
+				timestamp: new Date(),
+				footer: {
+					text: "© Ikaros, Hentai Univers"
+				}
+			}
+		})
+	})
+};
+	userUnban(client){
+	client.on('guildBanRemove', function(guild, user){
+		const logs_channel = guild.channels.find('name', 'logs');
+		logs_channel.send({
+			embed :{
+				color : 0x50f0b0,
+				fields :[{
+					name: "Log - Membre Débanni",
+					value: `Le membre <@${user.id}> a été débanni du serveur`,
+				}],
+				timestamp: new Date(),
+				footer: {
+					text: "© Ikaros, Hentai Univers"
+				}
+			}
+		})
+	})
+};
+}
+
+function memberGetRole(oldRole, newRole, newMember, logs_channel){
+	for (let i = 0; i < newRole.length; i++){
+		if (oldRole[i] != newRole[i]){
+			logs_channel.send({
+				embed :{
+					color : 0x50f0b0,
+					fields :[{
+						name: "Log - Role obtenu",
+						value: `Le membre <@${newMember.user.id}> a obtenu le role ${newRole[i]}.`,
+					}],
+					timestamp: new Date(),
+					footer: {
+						text: "© Ikaros, Hentai Univers"
+					}
+				}
+			})
+			return ;
+		}
+	}
+}
+
+function memberRemoveRole(oldRole, newRole, newMember, logs_channel){
+	for (let i = 0; i < oldRole.length; i++){
+		if (oldRole[i] != newRole[i]){
+			logs_channel.send({
+				embed :{
+					color : 0x50f0b0,
+					fields :[{
+						name: "Log - Role retiré",
+						value: `Le membre <@${newMember.user.id}> n'a plus le role ${oldRole[i]}.`,
+					}],
+					timestamp: new Date(),
+					footer: {
+						text: "© Ikaros, Hentai Univers"
+					}
+				}
+			})
+			return ;
+		}
+	}
 }

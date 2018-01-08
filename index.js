@@ -21,9 +21,15 @@ client.registry
 	['admin', 'Admin'],
 	['help', 'Help'],
 	['role', 'Role'],
+	['image', 'Image'],
 ])
 
 .registerCommandsIn(path.join(__dirname, 'commands'));
+
+client.on('error', error => {
+	console.log(error);
+	return ;
+});
 
 client.on('guildMemberAdd', member => {
 	const channel = member.guild.channels.find('name', 'hall_d_entree');

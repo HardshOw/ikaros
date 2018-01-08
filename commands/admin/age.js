@@ -14,6 +14,10 @@ Attribut le role "Membres" si l'utilisateur est vérifié. `,
 	}
 
 	async run(msg, args){
+		if (args.length == 0){
+			msg.reply("Indiquez un age merci");
+			return ;
+		}
 		if (msg.member.roles.find("name", "Membres") != undefined)
 		{
 			msg.reply("Te fous pas de la gueule des Nekos")

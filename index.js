@@ -7,7 +7,7 @@ const logs = require('./logs.json');
 const EventHandler = require("./commands/admin/EventHandler.js");
 
 const client = new Commando.Client({
-	owner: logs.OWNER,
+	owner: process.env.BOT_OWNER,
 	commandPrefix: '?',
 	unknownCommandResponse: false,
 	disableEveryone: true
@@ -44,4 +44,4 @@ ${command}
 Si tu as 16 ans.`);
 });
 
-client.login(logs.TOKEN);
+client.login(process.env.BOT_TOKEN);

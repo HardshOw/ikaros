@@ -13,6 +13,9 @@ module.exports = class EventHandler {
 	}
 	getDeleteMessage(client) {
 		client.on('messageDelete', message => {
+			if (message.author.bot == true){
+				return ;
+			}
 		const logs_channel = message.guild.channels.find('name', 'logs');
 		if (message.content.length === 0){
 			message.content = "[NO TEXT IN MESSAGE]";
@@ -121,16 +124,8 @@ module.exports = class EventHandler {
 		const logs_channel = oldMember.guild.channels.find('name', 'logs');
 		let oldRole = oldMember.roles.array();
 		let newRole = newMember.roles.array();
-		oldRole.sort((function(a, b){
-	    if(a.value < b.value) return -1;
-	    if(a.value > b.value) return 1;
-	    return 0;
-		}));
-		newRole.sort((function(a, b){
-	    if(a.value < b.value) return -1;
-	    if(a.value > b.value) return 1;
-	    return 0;
-		}));
+		oldRole = oldRole.sort();
+		newRole = newRole.sort();
 		if (oldRole.length == newRole.length){
 			console.log(oldRole.length);
 			return ;
@@ -180,7 +175,7 @@ module.exports = class EventHandler {
 };
 }
 
-function memberGetRole(oldRole, newRole, newMember, logs_channel){
+function memberGetRole(oldRole, newRole, Member, logs_channel){
 	for (let i = 0; i < newRole.length; i++){
 		if (oldRole[i] != newRole[i]){
 			logs_channel.send({
@@ -188,7 +183,7 @@ function memberGetRole(oldRole, newRole, newMember, logs_channel){
 					color : 0x50f0b0,
 					fields :[{
 						name: "Log - Role obtenu",
-						value: `Le membre <@${newMember.user.id}> a obtenu le role ${newRole[i]}.`,
+						value: `Le membre <@${Member.user.id}> a obtenu le role ${newRole[i]}.`,
 					}],
 					timestamp: new Date(),
 					footer: {
@@ -201,7 +196,7 @@ function memberGetRole(oldRole, newRole, newMember, logs_channel){
 	}
 }
 
-function memberRemoveRole(oldRole, newRole, newMember, logs_channel){
+function memberRemoveRole(oldRole, newRole, Member, logs_channel){
 	for (let i = 0; i < oldRole.length; i++){
 		if (oldRole[i] != newRole[i]){
 			logs_channel.send({
@@ -209,7 +204,7 @@ function memberRemoveRole(oldRole, newRole, newMember, logs_channel){
 					color : 0x50f0b0,
 					fields :[{
 						name: "Log - Role retiré",
-						value: `Le membre <@${newMember.user.id}> n'a plus le role ${oldRole[i]}.`,
+						value: `Le membre <@${Member.user.id}> n'a plus le role ${oldRole[i]}.`,
 					}],
 					timestamp: new Date(),
 					footer: {
@@ -220,4 +215,13 @@ function memberRemoveRole(oldRole, newRole, newMember, logs_channel){
 			return ;
 		}
 	}
+}
+
+function printRoles(role1, role2){
+	role1.forEach(value => {
+		console.log(value.name);
+	})
+	role2.forEach(value1 =>{
+		console.log(value1.name);
+	})
 }

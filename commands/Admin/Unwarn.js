@@ -162,6 +162,10 @@ module.exports = class Warn extends commando.Command {
 
 function checkPerm(msg, args)
 {
+	if (msg.member.roles == undefined){
+		msg.reply("Error");
+		return ;
+	}
 	if (msg.member.roles.find('name', args) != undefined)
 		return 1;
 	return 0;

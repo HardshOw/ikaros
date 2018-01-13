@@ -79,7 +79,10 @@ module.exports = class Ban extends commando.Command {
 				}
 			}
 
-			await args.member.send(embedMessageUser);
+			const is_member = msg.guild.members.exists('user', args.member);
+			if (is_member == true){
+				await args.member.send(embedMessageUser);
+			}
 			msg.guild.ban(args.member.id, {reason: args.reason});
 			msg.channel.send(embedMessageStaff)
 
